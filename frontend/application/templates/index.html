@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block body %}
+<h2> Home </h2>
+<br>
+<h3> This Workout: </h3>
+<br>
+{{ workout }}
+<br>
+<h3> Last 5 Workouts: </h3>
+<br>
+{% for exercises in past5 %}
+{{ exercises }}
+<br>
+{% endfor %}
+{% endblock body %}
+

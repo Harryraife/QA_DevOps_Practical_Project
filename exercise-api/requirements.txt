@@ -1,0 +1,4 @@
+Flask
+markupsafe
+itsdangerous
+Jinja2
