@@ -1,0 +1,87 @@
+version: '3.8'
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:alpine
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: ./nginx.conf
+        target: /etc/nginx/nginx.conf
+    networks:
+      - exercise-net
+    depends_on:
+      - frontend
+  mysql:
+    container_name: mysql
+    image: harryraife/exercise-gen-db:latest
+    build: ./exercise-db
+    ports:
+    - target: 3306
+      protocol: tcp
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: exercisedb
+    volumes:
+      - type: volume
+        source: exercise-vol
+        target: /var/lib/mysql
+    networks:
+      - exercise-net
+  frontend:
+    container_name: frontend
+    image: harryraife/frontend:latest
+    build: ./frontend
+    ports:
+    - target: 5000
+      published: 5000
+      protocol: tcp
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      - exercise-net
+    depends_on:
+      - mysql
+      - movement-api
+      - exercise-api
+      - sets-api
+  movement-api:
+    #container_name: movement-api
+    image: harryraife/movement-api:latest
+    build: ./movement-api
+    ports:
+    - target: 5001
+      protocol: tcp
+    deploy:
+      replicas: 3
+    networks:
+      - exercise-net
+  exercise-api:
+    #container_name: exercise-api
+    image: harryraife/exercise-api:latest
+    build: ./exercise-api
+    ports:
+    - target: 5002
+      protocol: tcp
+    deploy:
+      replicas: 3
+    networks:
+      - exercise-net
+  sets-api:
+    #container_name: sets-api
+    image: harryraife/sets-api:latest
+    build: ./sets-api
+    ports:
+    - target: 5003
+      protocol: tcp
+    deploy:
+      replicas: 3
+    networks:
+      - exercise-net
+volumes:
+  exercise-vol:
+networks:
+  exercise-net:

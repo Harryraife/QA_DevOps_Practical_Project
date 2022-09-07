@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+{% block body %}
+<h2> History </h2>
+<br>
+{% for exercise in exercises_history %}
+{{ exercise }} {{ exercise.date_generated }}
+<br>
+{% endfor %}
+{% endblock body %}
