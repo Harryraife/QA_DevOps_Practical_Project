@@ -81,3 +81,4 @@ The ideal overall structure of the CI/CD pipeline is:
 The first future improvement would, as mentioned, be the use of a database which can persist data. The app could also be further improved in future sprints by using a locally hosted Nexus repository to speed up deployment, as the images would then not have to be fetched from Dockerhub, and by using another NGINX service as an external load balancer, to provide a single point of entry to the application.
 
 ## Updates:
+update test
