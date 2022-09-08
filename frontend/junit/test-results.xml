@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="0" failures="1" hostname="qapracticalmanager" name="pytest" skipped="0" tests="2" time="0.956" timestamp="2022-09-07T18:08:47.023757"><testcase classname="tests.test_frontend.TestViews" name="test_hist_get" time="0.063" /><testcase classname="tests.test_frontend.TestViews" name="test_home_get" time="0.030"><failure message="requests_mock.exceptions.NoMockAddress: No mock address: GET http://movement-api:5001/get_exercise">self = &lt;test_frontend.TestViews testMethod=test_home_get&gt;
+
+    def test_home_get(self):
+        # mock values
+        name = "Bench"
+        sets = "2"
+        reps = "2"
+        accessories = "Military Press, Chest Flys and Tricep extensions"
+        with requests_mock.Mocker() as m:
+            m.get("http://exercise_generator_movement-api:5001/get_exercise", text=name)
+            m.get("http://exercise_generator_sets-api:5003/get_sets", text=sets)
+            m.get("http://exercise_generator_sets-api:5003/get_reps", text=reps)
+            m.post("http://exercise_generator_exercise-api:5002/get_workout", text=accessories)
+&gt;           response = self.client.get(url_for('home'))
+
+tests/test_frontend.py:56: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+venv/lib/python3.6/site-packages/werkzeug/test.py:1131: in get
+    return self.open(*args, **kw)
+venv/lib/python3.6/site-packages/flask/testing.py:227: in open
+    follow_redirects=follow_redirects,
+venv/lib/python3.6/site-packages/werkzeug/test.py:1076: in open
+    response = self.run_wsgi_app(request.environ, buffered=buffered)
+venv/lib/python3.6/site-packages/werkzeug/test.py:945: in run_wsgi_app
+    rv = run_wsgi_app(self.application, environ, buffered=buffered)
+venv/lib/python3.6/site-packages/werkzeug/test.py:1233: in run_wsgi_app
+    app_rv = app(environ, start_response)
+venv/lib/python3.6/site-packages/flask/app.py:2463: in __call__
+    return self.wsgi_app(environ, start_response)
+venv/lib/python3.6/site-packages/flask/app.py:2449: in wsgi_app
+    response = self.handle_exception(e)
+venv/lib/python3.6/site-packages/flask/app.py:1866: in handle_exception
+    reraise(exc_type, exc_value, tb)
+venv/lib/python3.6/site-packages/flask/_compat.py:39: in reraise
+    raise value
+venv/lib/python3.6/site-packages/flask/app.py:2446: in wsgi_app
+    response = self.full_dispatch_request()
+venv/lib/python3.6/site-packages/flask/app.py:1951: in full_dispatch_request
+    rv = self.handle_user_exception(e)
+venv/lib/python3.6/site-packages/flask/app.py:1820: in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+venv/lib/python3.6/site-packages/flask/_compat.py:39: in reraise
+    raise value
+venv/lib/python3.6/site-packages/flask/app.py:1949: in full_dispatch_request
+    rv = self.dispatch_request()
+venv/lib/python3.6/site-packages/flask/app.py:1935: in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+application/routes.py:11: in home
+    exercise_name = requests.get('http://movement-api:5001/get_exercise')
+venv/lib/python3.6/site-packages/requests/api.py:75: in get
+    return request('get', url, params=params, **kwargs)
+venv/lib/python3.6/site-packages/requests/api.py:61: in request
+    return session.request(method=method, url=url, **kwargs)
+venv/lib/python3.6/site-packages/requests/sessions.py:529: in request
+    resp = self.send(prep, **send_kwargs)
+venv/lib/python3.6/site-packages/requests_mock/mocker.py:185: in _fake_send
+    return _original_send(session, request, **kwargs)
+venv/lib/python3.6/site-packages/requests/sessions.py:645: in send
+    r = adapter.send(request, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;requests_mock.adapter.Adapter object at 0x7f1da6895c50&gt;, request = &lt;requests_mock.request._RequestObjectProxy object at 0x7f1da67dd3c8&gt;
+kwargs = {'cert': None, 'proxies': OrderedDict(), 'stream': False, 'timeout': None, ...}, matcher = &lt;requests_mock.adapter._Matcher object at 0x7f1da6895dd8&gt;, resp = None
+
+    def send(self, request, **kwargs):
+        request = _RequestObjectProxy(request,
+                                      case_sensitive=self._case_sensitive,
+                                      **kwargs)
+        self._add_to_history(request)
+    
+        for matcher in reversed(self._matchers):
+            try:
+                resp = matcher(request)
+            except Exception:
+                request._matcher = weakref.ref(matcher)
+                raise
+    
+            if resp is not None:
+                request._matcher = weakref.ref(matcher)
+                resp.connection = self
+                logger.debug('{} {} {}'.format(request._request.method,
+                                               request._request.url,
+                                               resp.status_code))
+                return resp
+    
+&gt;       raise exceptions.NoMockAddress(request)
+E       requests_mock.exceptions.NoMockAddress: No mock address: GET http://movement-api:5001/get_exercise
+
+venv/lib/python3.6/site-packages/requests_mock/adapter.py:261: NoMockAddress</failure></testcase></testsuite></testsuites>
