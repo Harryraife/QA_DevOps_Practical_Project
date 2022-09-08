@@ -1,1 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="0" failures="0" hostname="qapracticalmanager" name="pytest" skipped="0" tests="2" time="0.369" timestamp="2022-09-07T18:08:54.315594"><testcase classname="tests.test_sets_api.TestViews" name="test_get_reps" time="0.010" /><testcase classname="tests.test_sets_api.TestViews" name="test_get_sets" time="0.005" /></testsuite></testsuites>
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="0" failures="2" hostname="qapracticalmanager" name="pytest" skipped="0" tests="2" time="0.478" timestamp="2022-09-08T09:55:01.437220"><testcase classname="tests.test_sets_api.TestViews" name="test_get_reps" time="0.012"><failure message="AssertionError: b'1' not found in b'9'">self = &lt;test_sets_api.TestViews testMethod=test_get_reps&gt;
+
+    def test_get_reps(self):
+       with patch('random.choice') as r:
+           r.return_value = "1"
+           response = self.client.get(url_for('reps'))
+           self.assertEqual(response.status_code, 200)
+&gt;          self.assertIn(b'1', response.data)
+E          AssertionError: b'1' not found in b'9'
+
+tests/test_sets_api.py:28: AssertionError</failure></testcase><testcase classname="tests.test_sets_api.TestViews" name="test_get_sets" time="0.004"><failure message="AssertionError: b'1' not found in b'4'">self = &lt;test_sets_api.TestViews testMethod=test_get_sets&gt;
+
+    def test_get_sets(self):
+       with patch('random.choice') as r:
+           r.return_value = "1"
+           response = self.client.get(url_for('sets'))
+           self.assertEqual(response.status_code, 200)
+&gt;          self.assertIn(b'1', response.data)
+E          AssertionError: b'1' not found in b'4'
+
+tests/test_sets_api.py:21: AssertionError</failure></testcase></testsuite></testsuites>

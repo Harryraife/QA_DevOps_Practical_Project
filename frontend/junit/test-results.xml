@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="0" failures="1" hostname="qapracticalmanager" name="pytest" skipped="0" tests="2" time="0.956" timestamp="2022-09-07T18:08:47.023757"><testcase classname="tests.test_frontend.TestViews" name="test_hist_get" time="0.063" /><testcase classname="tests.test_frontend.TestViews" name="test_home_get" time="0.030"><failure message="requests_mock.exceptions.NoMockAddress: No mock address: GET http://movement-api:5001/get_exercise">self = &lt;test_frontend.TestViews testMethod=test_home_get&gt;
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="0" failures="1" hostname="qapracticalmanager" name="pytest" skipped="0" tests="2" time="1.095" timestamp="2022-09-08T09:54:53.749824"><testcase classname="tests.test_frontend.TestViews" name="test_hist_get" time="0.073" /><testcase classname="tests.test_frontend.TestViews" name="test_home_get" time="0.029"><failure message="requests_mock.exceptions.NoMockAddress: No mock address: GET http://movement-api:5001/get_exercise">self = &lt;test_frontend.TestViews testMethod=test_home_get&gt;
 
     def test_home_get(self):
         # mock values
@@ -59,8 +59,8 @@ venv/lib/python3.6/site-packages/requests/sessions.py:645: in send
     r = adapter.send(request, **kwargs)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
-self = &lt;requests_mock.adapter.Adapter object at 0x7f1da6895c50&gt;, request = &lt;requests_mock.request._RequestObjectProxy object at 0x7f1da67dd3c8&gt;
-kwargs = {'cert': None, 'proxies': OrderedDict(), 'stream': False, 'timeout': None, ...}, matcher = &lt;requests_mock.adapter._Matcher object at 0x7f1da6895dd8&gt;, resp = None
+self = &lt;requests_mock.adapter.Adapter object at 0x7f7758684518&gt;, request = &lt;requests_mock.request._RequestObjectProxy object at 0x7f77585d07f0&gt;
+kwargs = {'cert': None, 'proxies': OrderedDict(), 'stream': False, 'timeout': None, ...}, matcher = &lt;requests_mock.adapter._Matcher object at 0x7f7758684f28&gt;, resp = None
 
     def send(self, request, **kwargs):
         request = _RequestObjectProxy(request,
