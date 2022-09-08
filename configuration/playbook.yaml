@@ -1,0 +1,9 @@
+- hosts: localhost
+  become: true
+  roles: 
+  - dockerinstall
+
+- hosts: localhost
+  become: true
+  roles:
+  - swarmmanager

@@ -2,7 +2,7 @@ pipeline {
     agent any
     stages {
         stage{'Set-up'}{
-            steps{sh 'docker-compose build'}
+            steps{sh 'docker-compose up --build'}
         }
     }
 }
