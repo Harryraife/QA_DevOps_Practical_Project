@@ -62,13 +62,13 @@ Git was used for version control, with the repository hosted on github. A featur
 
 The development environment used was a Ubuntu virtual machine, hosted on GCP, accessed via VSCode. 
 
-Jenkins was used as a CI server. In response to a github webhook, Jenkins cloned down the repo and executed the pipeline script defined in the Jenkinsfile. This pipeline consists of 4 main stages: test, build/push,deploy and post-build actions. The test stage executes a bash script which cycles through the directories for the four services and runs unit tests using pytest. The front-end and all APIs had unit tests written to test all areas of functionality. To test the HTTP requests made by the front-end, requests_mock was used to simulate responses from the APIs. To test the functionality of the APIs themselves, the random.choice function was patched with unittest.mock to ensure reproducible test performance. The results of the tests are published in xml format using j-unit and cobertura, these reports show percent code coverage as well as trends in test results over time  
+Jenkins was used as a CI server. In response to a github webhook, Jenkins cloned down the repo. 
+
+Then from the app an Ansible playbook was utilised to spin up the 4 microservices.
+
+The front-end and all APIs had unit tests written to test all areas of functionality. To test the HTTP requests made by the front-end, requests_mock was used to simulate responses from the APIs. To test the functionality of the APIs themselves, the random.choice function was patched with unittest.mock to ensure reproducible test performance.  
 
 100% coverage was achieved for all tests; this ensured that all of the functions of the app worked exactly as intended.
-
-Following the build and push, the deploy stage deploys the application. First the docker-compose.yaml and nginx.conf files are copied to the manager node by secure copy (scp). Then, an ansible playbook is used to run three roles: the first installs docker on the swarm machines if it is not present already and adds jenkins to the docker group, the second initialises a swarm on the manager node and uses the Ansible docker stack module to deploy the application, and the third adds the worker node to the swarm.
-
-Successful stages appear green, unstable builds are indicated by yellow stages, and failures are indicated via red stages. If a stage fails, later stages will be skipped, preventing failed versions from being deployed.
 
 The ideal overall structure of the CI/CD pipeline is:
 
