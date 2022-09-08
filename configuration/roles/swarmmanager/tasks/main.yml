@@ -1,0 +1,8 @@
+---
+
+- name: "Deploy app"
+  docker_stack:
+    state: present
+    name: exercise_generator
+    compose:
+      - /home/HarryHetheringtons/QA_Project/QA_DevOps_Practical_Project/docker-compose.yaml
